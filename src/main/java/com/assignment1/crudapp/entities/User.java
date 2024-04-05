@@ -9,7 +9,9 @@ import java.util.List;
 @Table(name = "USER")
 public class User {
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
+    private List<Contact> contacts = new ArrayList<>();
+
     public List<Contact> getContacts() {
         return contacts;
     }
@@ -39,7 +41,7 @@ public class User {
     @Column(name = "user_email",unique = true,nullable = false)
     private String email;
 
-    private List<Contact> contacts = new ArrayList<>();
+
 
     public User(int id, String name, String email, String password, String userDesciption) {
         this.id = id;
@@ -53,7 +55,7 @@ public class User {
         super();
     }
 
-    @Column(nullable = false)
+    @Column(name = "user_password",nullable = true)
     private String password;
 
     public int getId() {

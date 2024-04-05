@@ -77,13 +77,13 @@ public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "contact_id",nullable = false)
+//    @Column(name = "contact_id",nullable = false)
     private int cId;
 
-    @Column(name="contact_first_name", nullable = false)
+//    @Column(name="contact_first_name", nullable = false)
 
     private String name;
-    @Column(name = "contact_second_name",nullable = false)
+//    @Column(name = "contact_second_name",nullable = false)
     private String secondname;
 
     @Override
@@ -103,15 +103,21 @@ public class Contact {
         return aboutuser;
     }
 
+    public Contact(){
+        super();
+    }
+
     public void setAboutuser(String aboutuser) {
         this.aboutuser = aboutuser;
     }
 
     private String work;
 
-    @Column(name = "contact_email",unique = true,nullable = false)
+//    @Column(name = "contact_email",unique = true,nullable = false)
     private String email;
-    @Column(name = "contact_phoneNo",unique = true,nullable = false)
+//    @Column(name = "contact_phoneNo",unique = true,nullable = false)
+
     private String phone;
+    @Column(length = 500)
     private String aboutuser;
 }
