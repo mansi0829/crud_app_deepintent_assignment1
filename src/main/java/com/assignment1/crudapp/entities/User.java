@@ -1,12 +1,45 @@
 package com.assignment1.crudapp.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "USER")
 public class User {
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contacts=" + contacts +
+                ", password='" + password + '\'' +
+                ", userDescription='" + userDescription + '\'' +
+                '}';
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id",nullable = false)
     private int id;
+    @Column(name="user_name", nullable = false)
     private String name;
+    @Column(name = "user_email",unique = true,nullable = false)
     private String email;
+
+    private List<Contact> contacts = new ArrayList<>();
 
     public User(int id, String name, String email, String password, String userDesciption) {
         this.id = id;
@@ -16,6 +49,11 @@ public class User {
         this.userDescription = userDesciption;
     }
 
+    public User(){
+        super();
+    }
+
+    @Column(nullable = false)
     private String password;
 
     public int getId() {
@@ -46,17 +84,6 @@ public class User {
         return password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userDescription='" + userDescription + '\'' +
-                '}';
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -68,6 +95,6 @@ public class User {
     public void setUserDescription(String userDescription) {
         this.userDescription = userDescription;
     }
-
+    @Column(length = 500)
     private String userDescription;
 }
