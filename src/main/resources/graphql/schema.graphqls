@@ -1,0 +1,26 @@
+scalar UUID
+
+type Query {
+    getUser(userId: UUID): User
+    getAllUsers: [User]
+}
+
+type User {
+    id: UUID
+    username: String
+    email: String
+    phonenumber: Int
+}
+
+input UserInput {
+    id: UUID
+    username: String
+    email: String
+    phonenumber: Int
+}
+
+type  Mutation{
+    createUser(user: UserInput!):User
+    deleteUser(userId: UUID): Boolean
+    updateUser(user:UserInput):Boolean
+}
